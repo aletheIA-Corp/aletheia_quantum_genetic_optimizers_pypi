@@ -593,7 +593,7 @@ Además, se prepara el entorno de computación cuántica, si es necesario.
 
 Ejemplo de circuito aplicado:
 
-[./qc_reproduction_bound_restricted.png]
+![Circuito cuántico de reproducción de hijos](https://github.com/aletheIA-Corp/aletheia_quantum_genetic_optimizers_pypi/blob/main/aletheia_quantum_genetic_optimizers/imgs_readme/qc_reproduction_bound_restricted.png?raw=true)
 
 3. *Mutación*: 
     - *Mutación de los hijos*: Los nuevos individuos generados pasan por un proceso de mutación. Dependiendo de la probabilidad y política de mutación (`mutate_probability`, `mutate_gen_probability`, `mutation_policy`), se modifican algunos de los genes de los hijos.
