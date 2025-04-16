@@ -1,6 +1,6 @@
 [project]
 name = "aqgo"
-version = "0.1.10"
+version = "0.1.11"
 description = "Es el optimizador cuántico de AletheIA"
 authors = [
   { name = "Luciano Ezequiel Bizin", email = "lucianobizin@gmail.com" },

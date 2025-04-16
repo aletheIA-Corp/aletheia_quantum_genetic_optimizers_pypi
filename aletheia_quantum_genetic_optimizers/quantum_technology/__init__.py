@@ -138,7 +138,7 @@ class QuantumMachine:
                 # -- Obtenemos el nombre de la máquina elegida y el transpilador de esa máquina
                 if self.qm_connection_service == "ibm_quantum":
 
-                    self.IT.sub_intro_rint(f"Conectando con el servicio de computacion cuantica de IBM: ibm_quantum")
+                    self.IT.sub_intro_print(f"Conectando con el servicio de computacion cuantica de IBM: ibm_quantum")
 
                     # -- Generamos el servicio de conexion
                     channel_type = Literal["ibm_cloud", "ibm_quantum", "local"]
@@ -149,7 +149,7 @@ class QuantumMachine:
                     if self.service.active_account()["verify"]:
                         self.IT.info_print("Conexion realizada con exito")
 
-                        self.IT.sub_intro_rint("Datos de la cuenta")
+                        self.IT.sub_intro_print("Datos de la cuenta")
                         _user_data: dict = self.service.usage()
                         _user_period_start: str = _user_data["period"]["start"]
                         _user_period_end: str = _user_data["period"]["end"]
@@ -165,14 +165,14 @@ class QuantumMachine:
                         self.IT.info_print(f"Trabajos pendientes: {_user_pending_jobs} / {_user_max_pending_jobs}")
 
                         # -- Buscamos la maquina elegida
-                        self.IT.sub_intro_rint("Buscando ordenador cuantico...")
+                        self.IT.sub_intro_print("Buscando ordenador cuantico...")
                         if self.quantum_machine == "least_busy":
-                            print(f"---> Buscando la maquina menos cargada...")
+                            self.IT.info_print(f"---> Buscando la maquina menos cargada...")
                             least_busy_machine = self.service.least_busy()
                             self.selected_machine = self.service.backend(least_busy_machine.name)
-                            print(f"---> La maquina menos cargada es: {self.selected_machine.name}")
+                            self.IT.info_print(f"---> La maquina menos cargada es: {self.selected_machine.name}")
                         else:
-                            print(f"---> Buscando la maquina {self.quantum_machine}...")
+                            self.IT.info_print(f"---> Buscando la maquina {self.quantum_machine}...")
                             self.selected_machine: Backend = self.service.backend(self.quantum_machine)
 
                         self.IT.info_print(f"Numero de Qubits: {self.selected_machine.num_qubits}")
@@ -246,67 +246,6 @@ class QuantumMachine:
             results_list.append(counts)
 
         return results_list
-
-    """def connection_service(self, optimization_level: int = 1):
-
-
-        if self.qm_connection_service == "ibm_quantum":
-
-            self.IT.sub_intro_rint(f"Conectando con el servicio de computacion cuantica de IBM: ibm_quantum")
-
-            # -- Generamos el servicio de conexion
-            channel_type = Literal["ibm_cloud", "ibm_quantum", "local"]
-            channel = cast(channel_type, self.qm_connection_service)
-            self.service: QiskitRuntimeService = QiskitRuntimeService(channel=channel, token=self.qm_api_key)
-
-            # -- Chequeamos si la conexion ha sido exitosa
-            if self.service.active_account()["verify"]:
-                print("---> Conexion realizada con exito")
-
-                print("---> Datos de la cuenta")
-                _user_data: dict = self.service.usage()
-                _user_period_start: str = _user_data["period"]["start"]
-                _user_period_end: str = _user_data["period"]["end"]
-                _by_instance: str = _user_data["byInstance"][0]["instance"]
-                _user_quota: int = _user_data["byInstance"][0]["quota"]
-                _user_usage: int = _user_data["byInstance"][0]["usage"]
-                _user_pending_jobs: int = _user_data["byInstance"][0]["pendingJobs"]
-                _user_max_pending_jobs: int = _user_data["byInstance"][0]["maxPendingJobs"]
-
-                print(f"---> Instancia de ejecucion: {_by_instance}")
-                print(f"---> Cuota de ejecucion: {_user_quota}")
-                print(f"---> Usos del usuario: {_user_usage}")
-                print(f"---> Trabajos pendientes: {_user_pending_jobs} / {_user_max_pending_jobs}")
-
-                # -- Buscamos la maquina elegida
-                print("---> Buscando ordenador cuantico...")
-                if self.quantum_machine == "least_busy":
-                    print(f"---> Buscando la maquina menos cargada...")
-                    least_busy_machine = self.service.least_busy()
-                    self.selected_machine = self.service.backend(least_busy_machine.name)
-                    print(f"---> La maquina menos cargada es: {self.selected_machine.name}")
-                else:
-                    print(f"---> Buscando la maquina {self.quantum_machine}...")
-                    self.selected_machine = self.service.backend(self.quantum_machine)
-
-                print(f"---> Numero de Qubits: {self.selected_machine.num_qubits}")
-                print(f"---> Trabajos pendientes: {self.selected_machine.status().pending_jobs}")
-                print(f"---> Operaciones permitidas: {self.selected_machine.operation_names}")
-                print(f"---> Numero maximo de circuitos: {self.selected_machine.max_circuits}")
-
-                if self.selected_machine is not None:
-
-                    # -- Generamos el transpilador o pass manager de la maquina elegida
-                    self.ibm_machine_transpiler = generate_preset_pass_manager(backend=self.selected_machine, optimization_level=optimization_level)
-
-                else:
-                    print("El ordenador especificado no existe. FIN")
-                    sys.exit()
-
-                return self.selected_machine, self.ibm_machine_transpiler
-
-        elif self.qm_connection_service == "ibm_cloud":
-            return None"""
 
 
 class QuantumTechnology:
