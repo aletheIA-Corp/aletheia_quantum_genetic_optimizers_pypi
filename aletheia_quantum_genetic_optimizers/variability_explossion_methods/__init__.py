@@ -14,13 +14,13 @@ class VariabilityExplossion(ABC):
         Este constructor inicializa los parámetros relacionados con el early stopping y la explosión de variabilidad,
         heredando de la clase base VariabilityExplossion.
 
-        :param early_stopping_generations: [int] Número de generaciones que se deben esperar para activar la explosión de variabilidad si la moda se repite.
+        :param early_stopping_generations: [int] Número de generaciones que se deben esperar para activar la explosión de variabilidad si el min o max se repite.
         :param problem_type: [Literal] Tipo de problema a resolver, puede ser 'maximize' o 'minimize'.
         :param round_decimals: [int] Número de decimales para redondear en las estadísticas de variabilidad.
         :param verbose: [bool] Indica si se deben mostrar mensajes detallados sobre el estado de la explosión de variabilidad.
         """
 
-        # -- Obtenemos las generaciones que voy a esperar para que si se repite la moda, arrancar la explosion de variabilidad
+        # -- Obtenemos las generaciones que voy a esperar para que si se repite el min o max, arrancar la explosion de variabilidad
         self.early_stopping_generations: int = early_stopping_generations
 
         # -- Almacenamos el tipo de problema e instancio InfoTools
@@ -43,7 +43,7 @@ class VariabilityExplossion(ABC):
     def evaluate_early_stopping(self, generations_fitness_statistics_df: pd.DataFrame | None) -> None:
         """
         Metodo que evalúa si se deben activar las condiciones para el early stopping y la explosión de variabilidad.
-        Si la moda en las últimas generaciones ha sido constante, se activa la explosión de variabilidad.
+        Si el min o max en las últimas generaciones ha sido constante, se activa la explosión de variabilidad.
         :param generations_fitness_statistics_df: [pd.DataFrame | None] DataFrame con las estadísticas de fitness de las generaciones.
 
         :return: tuple (m_proba, m_gen_proba, m_policy, early_stopping_generations_execute)
@@ -92,7 +92,7 @@ class VariabilityExplossion(ABC):
 class CrazyVariabilityExplossion(VariabilityExplossion):
     def __init__(self, early_stopping_generations: int, problem_type: Literal['maximize', 'minimize'], round_decimals: int = 3, verbose: bool = False):
 
-        # -- Obtengo las generaciones que voy a esperar para que si se repite la moda, arrancar la explosion de variabilidad
+        # -- Obtengo las generaciones que voy a esperar para que si se repite el min o max, arrancar la explosion de variabilidad
         super().__init__(early_stopping_generations, problem_type, round_decimals, verbose)
 
     def evaluate_early_stopping(self, generations_fitness_statistics_df: pd.DataFrame | None) -> tuple:

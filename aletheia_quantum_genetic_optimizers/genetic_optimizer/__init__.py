@@ -66,9 +66,9 @@ class GenethicOptimizer:
         :param mutate_gen_probability: [float] Probabilidad de mute un gen
         :param mutation_policy: Literal['soft', 'normal', 'hard'] Política de mutación (liviana, estandar y agresiva),
         :param verbose: Variable que define si se pinta información extra en consola y si se generan los graficos de los circuitos cuánticos.
-        :param early_stopping_generations: Cantidad de generaciones que van a transcurrir para que en caso de repetirse la moda del fitness, se active el modo variability_explosion
+        :param early_stopping_generations: Cantidad de generaciones que van a transcurrir para que en caso de repetirse el min o max del fitness, se active el modo variability_explosion
         :param variability_explossion_mode: Modo de explosion de variabilidad, es decir, que se va a hacer para intentar salir de un minimo local establecido
-        :param variability_round_decimals: Decimales a los que redondear las estadisticas de cálculo de moda necesarias para la explosion de variabilidad. Por ejemplo,
+        :param variability_round_decimals: Decimales a los que redondear las estadisticas de cálculo del min o max para la explosion de variabilidad. Por ejemplo,
         en un caso de uso que busque accuracy, podría ser con 2 o 3 decimales. para casos de uso que contengan números muy bajos, habría que agregar más.
         :param randomness_quantum_technology. Literal["simulator", "quantum_machine"]. Tecnología cuántica con la que calculan la lógica. Si es simulator, se hará con un simulador definido en el
         parámetro service. Si es quantum_machine, el algoritmo se ejecutará en una máquina cuántica definida en el parámetro technology.  Se aplica al cálculo de numeros random (primera generación).

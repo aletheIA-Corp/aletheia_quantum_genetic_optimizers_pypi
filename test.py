@@ -59,8 +59,7 @@ def example_1_bounds_no_predefinidos():
             model.fit(X_train, y_train)
             y_pred = model.predict(X_test)
             score = r2_score(y_test, y_pred)
-            mae = mean_absolute_error(y_test, y_pred)
-
+            # mae = mean_absolute_error(y_test, y_pred)
             # print(f"Mae: {mae} - R2: {score}")
 
         else:
@@ -80,13 +79,11 @@ def example_1_bounds_no_predefinidos():
         elapsed_time = (datetime.datetime.now() - start_time).total_seconds()
 
         # Penalización por tiempo
-        reference_time = 0.5  # segundos
-        max_penalty_ratio = 0.01  # 1%
-        time_penalty = max_penalty_ratio * score * (elapsed_time / reference_time)
-        time_penalty = min(time_penalty, max_penalty_ratio * score)
-
-        penalized_score = score - time_penalty
-
+        # reference_time = 0.5  # segundos
+        # max_penalty_ratio = 0.01  # 1%
+        # time_penalty = max_penalty_ratio * score * (elapsed_time / reference_time)
+        # time_penalty = min(time_penalty, max_penalty_ratio * score)
+        # penalized_score = score - time_penalty
         # print(f"[{problem_type.upper()}] Score: {score:.4f} | Penalized: {penalized_score:.4f} | Time: {elapsed_time:.2f}s")
 
         return score
@@ -118,7 +115,7 @@ def example_1_bounds_no_predefinidos():
                              randomness_service="aer",
                              optimization_quantum_technology="simulator",
                              optimization_service="aer",
-                             qm_api_key="2e5075440484344c6c173e306b80e515f1a68f2bad2638095c89d2450ab83d87e81e7cc5bbdf7a1d7f93334a0f80244cb51d6c8c672fdac1076796764cc45c07",
+                             qm_api_key="API_KEY",
                              qm_connection_service="ibm_quantum",
                              quantum_machine="least_busy"
                              )
@@ -249,7 +246,7 @@ def example_2_tsp():
                              randomness_service="aer",
                              optimization_quantum_technology="simulator",
                              optimization_service="aer",
-                             qm_api_key="2e5075440484344c6c173e306b80e515f1a68f2bad2638095c89d2450ab83d87e81e7cc5bbdf7a1d7f93334a0f80244cb51d6c8c672fdac1076796764cc45c07",
+                             qm_api_key="API_KEY",
                              qm_connection_service="ibm_quantum",
                              quantum_machine="least_busy",
                              element_matrix=original_cities
